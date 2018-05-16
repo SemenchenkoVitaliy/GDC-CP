@@ -1,0 +1,46 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <title>KPILex</title>
+</head>
+  <body>
+    <div class="Header">
+      <center>
+        <a href="/">
+          <span>KPILex</span>
+        </a>
+      </center>
+    </div>
+    <div class="Content">
+    {{range $lection := .}}
+      <a href="/{{$lection.Id}}">
+        <span>{{$lection.Name}}</span>
+        <span>{{$lection.Lecturer}}</span>
+        <span>{{$lection.Course}}</span>
+        <span>{{$lection.Name}}</span>
+        <p>
+          <span>Tags</span>
+          {{range $tag := $lection.Tags}}
+            <span>{{$tag}}</span>
+          {{end}}
+        </p>
+        <p>
+          <span>Groups</span>
+          {{range $group := $lection.Groups}}
+            <span>{{$group}}</span>
+          {{end}}
+        </p>
+      </a>
+    {{end}}
+    </div>
+    <div class="Footer">
+      <p>Copyrights and trademarks are the property of their
+        respective owners. Use of these materials are allowed
+        under the fair use clause of the Copyright Law</p>
+    </div>
+  </body>
+</html>
+{{end}}

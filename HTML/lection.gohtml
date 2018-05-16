@@ -1,0 +1,50 @@
+{{define "lection"}}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <title>KPILex</title>
+</head>
+  <body>
+    <div class="Header">
+      <center>
+        <a href="/">
+          <span>KPILex</span>
+        </a>
+      </center>
+    </div>
+    <div class="Content">
+      <a href="/{{.Lection.Id}}">
+        <span>{{.Lection.Name}}</span>
+      </a>
+        <span>{{.Lection.Lecturer}}</span>
+        <span>{{.Lection.Course}}</span>
+        <span>{{.Lection.Name}}</span>
+        <p>
+          <span>Tags</span>
+          {{range $tag := .Lection.Tags}}
+            <span>{{$tag}}</span>
+          {{end}}
+        </p>
+        <p>
+          <span>Groups</span>
+          {{range $group := .Lection.Groups}}
+            <span>{{$group}}</span>
+          {{end}}
+        </p>
+        <p hidden>
+          <span>Content</span>
+          {{range $content := .Lection.ContentURIs}}
+            <a href="http://img.{{$.PublicUrl}}/data/{{$.Lection.Id}}/{{$content}}"></a>
+          {{end}}
+        </p>
+    </div>
+    <div class="Footer">
+      <p>Copyrights and trademarks are the property of their
+        respective owners. Use of these materials are allowed
+        under the fair use clause of the Copyright Law</p>
+    </div>
+  </body>
+</html>
+{{end}}

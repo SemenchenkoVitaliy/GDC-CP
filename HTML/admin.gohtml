@@ -1,0 +1,36 @@
+{{define "admin"}}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <title>KPILex</title>
+</head>
+  <body>
+    <div class="Content">
+      <iframe name="dummyframe" hidden></iframe>
+      <div>
+        <form target="dummyframe" action="http://api.{{$.PublicUrl}}" method="POST" enctype="multipart/form-data">
+          <input type="test" name="name" value="" placeholder="Lection Name">
+          <input type="text" name="action" value="add" hidden>
+          <input type="submit" value="Add Lection">
+        </form>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <th>Lections</th>
+          </thead>
+          <tbody>
+            {{range $lection := $.Lections}}
+            <tr>
+              <td><a href="/admin/{{$lection.Id}}">{{$lection.Name}}</a></td>
+            </tr>
+            {{end}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
+{{end}}

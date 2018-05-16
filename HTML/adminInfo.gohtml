@@ -1,0 +1,134 @@
+{{define "adminInfo"}}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <title>KPILex</title>
+  </head>
+  <body>
+    <div class="Content">
+      <div>
+        <iframe name="dummyframe" hidden></iframe>
+        <p><span>Lection Info</span></p>
+        <table>
+          <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Lecturer</th>
+            <th>Course</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{.Lection.Id}}</td>
+              <td>{{.Lection.Name}}</td>
+              <td>{{.Lection.Lecturer}}</td>
+              <td>{{.Lection.Course}}</td>
+              <td>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="remove" hidden>
+                  <input type="submit" value="Delete" onclick="document.location='/admin'">
+                </form>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="changeName" hidden>
+                  <input type="text" name="name" placeholder="{{.Lection.Name}}" onclick="this.value='{{.Lection.Name}}'">
+                  <input type="submit" value="Change name">
+                </form>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="changeLecturer" hidden>
+                  <input type="text" name="name" placeholder="{{.Lection.Lecturer}}" onclick="this.value='{{.Lection.Lecturer}}'">
+                  <input type="submit" value="Change Lecturer">
+                </form>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="changeCourse" hidden>
+                  <input type="text" name="name" placeholder="{{.Lection.Course}}" onclick="this.value='{{.Lection.Course}}'">
+                  <input type="submit" value="Change Course">
+                </form>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="addTag" hidden>
+                  <input type="text" name="name" value="" placeholder="tag">
+                  <input type="submit" value="Add tag">
+                </form>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="addGroup" hidden>
+                  <input type="text" name="name" value="" placeholder="XX-YY">
+                  <input type="submit" value="Add group">
+                </form>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="addContent" hidden>
+                  <input type="file" name="file" multiple="multiple">
+                  <input type="submit" value="Add content">
+                </form>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <th>Tag</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            {{range $tag := .Lection.Tags}}
+            <tr>
+              <td>{{$tag}}</td>
+              <td>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{$.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="remTag" hidden>
+                  <input type="text" name="name" value="{{$tag}}" hidden>
+                  <input type="submit" value="Delete tag">
+                </form>
+              </td>
+            </tr>            
+            {{end}}            
+          </tbody>
+        </table>
+
+        <table>
+          <thead>
+            <th>Tag</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            {{range $group := .Lection.Groups}}
+            <tr>
+              <td>{{$group}}</td>
+              <td>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{$.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="remGroup" hidden>
+                  <input type="text" name="name" value="{{$group}}" hidden>
+                  <input type="submit" value="Delete group">
+                </form>
+              </td>
+            </tr>            
+            {{end}}
+          </tbody>
+        </table>
+
+        <table>
+          <thead>
+            <th>Content</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            {{range $content := .Lection.ContentURIs}}
+            <tr>
+              <td>{{$content}}</td>
+              <td>
+                <form target="dummyframe" action="http://api.{{$.PublicUrl}}/{{$.Lection.Id}}" method="POST" enctype="multipart/form-data">
+                  <input type="text" name="action" value="remContent" hidden>
+                  <input type="text" name="name" value="{{$content}}" hidden>
+                  <input type="submit" value="Delete content">
+                </form>
+              </td>
+            </tr>            
+            {{end}}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </body>
+</html>
+{{end}}
