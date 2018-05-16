@@ -1,7 +1,6 @@
 package httpserver
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -36,8 +35,6 @@ func rootGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(lections)
-
 	if err = templates.ExecuteTemplate(w, "index", lections); err != nil {
 		netutils.InternalError(w, err, "Execute template index")
 		return
@@ -51,7 +48,7 @@ func searchGET(w http.ResponseWriter, r *http.Request) {
 		PublicUrl: publicUrl,
 	}
 
-	if err := templates.ExecuteTemplate(w, "lectionChapter", data); err != nil {
+	if err := templates.ExecuteTemplate(w, "search", data); err != nil {
 		netutils.InternalError(w, err, "Execute template search")
 		return
 	}

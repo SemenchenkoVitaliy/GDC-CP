@@ -63,6 +63,31 @@ func (db *Database) GetLectionUrls(start, quantity int, sort string) (ids []stri
 	return ids, err
 }
 
+func (db *Database) SearchLections(quantity int, name, lecturer, course, group string, tags []string) (ids []string, err error) {
+	urlStructs := []struct {
+		Id bson.ObjectId `json:"id" bson:"_id,omitempty"`
+	}{}
+
+	err = db.lections.
+		Find(bson.M{
+			"name":     bson.RegEx{name, ""},
+			"lecturer": bson.RegEx{lecturer, ""},
+			"course":   bson.RegEx{course, ""},
+			"groups":   bson.M{"$in": []string{group}},
+			"tags":     tags,
+		}).
+		Limit(quantity).
+		All(&urlStructs)
+	if err != nil {
+		return ids, err
+	}
+
+	for _, item := range urlStructs {
+		ids = append(ids, item.Id.Hex())
+	}
+	return ids, err
+}
+
 func (db *Database) GetLectionSingle(id string) (product Product, err error) {
 	err = db.lections.
 		Find(bson.M{

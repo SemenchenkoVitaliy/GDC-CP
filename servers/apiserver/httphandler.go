@@ -7,7 +7,7 @@ import (
 	"io"
 	"net/http"
 	// "strconv"
-	// "strings"
+	"strings"
 
 	dbDriver "github.com/SemenchenkoVitaliy/GDC-CP/dbDriver/mongo"
 	"github.com/SemenchenkoVitaliy/GDC-CP/netutils"
@@ -35,8 +35,6 @@ func rootGET(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println(lections)
-
 	result, err := json.Marshal(lections)
 	if err != nil {
 		netutils.InternalError(w, err, "JSON convert in roorGET")
@@ -48,10 +46,18 @@ func rootGET(w http.ResponseWriter, r *http.Request) {
 }
 
 func lectionGET(w http.ResponseWriter, r *http.Request) {
-	data, err := db.GetLectionSingle(mux.Vars(r)["lection"])
+	lection, err := db.GetLectionSingle(mux.Vars(r)["lection"])
 	if err != nil {
 		netutils.NotFoundError(w, nil, "No such lection: "+mux.Vars(r)["lection"])
 		return
+	}
+
+	data := struct {
+		Lection   dbDriver.Product
+		PublicUrl string
+	}{
+		Lection:   lection,
+		PublicUrl: publicUrl,
 	}
 
 	result, err := json.Marshal(data)
@@ -77,6 +83,34 @@ func rootPOST(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			http.Error(w, "no such action", 400)
 		}
+	case "search":
+		name := r.FormValue("name")
+		lecturer := r.FormValue("lecturer")
+		course := r.FormValue("course")
+		tags := r.FormValue("tags")
+		group := r.FormValue("group")
+
+		lectionUrls, err := db.SearchLections(10, name, lecturer, course, group, strings.Split(strings.Replace(tags, " ", "", -1), ","))
+		if err != nil {
+			netutils.InternalError(w, err, "Get top lections urls")
+			return
+		}
+
+		lections, err := db.GetLectionMultiple(lectionUrls)
+		if err != nil {
+			netutils.InternalError(w, err, "Get top lections")
+			return
+		}
+
+		result, err := json.Marshal(lections)
+		if err != nil {
+			netutils.InternalError(w, err, "JSON convert in roorGET")
+			return
+		}
+
+		w.Header().Set("Content-Type", "text/json")
+		w.Write([]byte(result))
+		return
 	default:
 		http.Error(w, "no such action: "+action, 400)
 		return
