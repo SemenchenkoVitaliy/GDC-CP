@@ -1,0 +1,124 @@
+html {
+  font-size: 10px;
+  font-family: 'Roboto Slab', serif; }
+
+.container {
+  width: 95%;
+  max-width: 1630px;
+  margin: 0 auto; }
+
+body {
+  background-color: #ededed; }
+
+header {
+  background-color: #2b2a29;
+  padding: 7px 0px; }
+  header nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: distribute;
+    justify-content: space-around; }
+    header nav p {
+      font-size: 28px;
+      font-weight: 600;
+      margin-top: 5px;
+      color: white; }
+    header nav form .search {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding: 5px;
+      border: 1px solid white;
+      background-color: white;
+      border-radius: 7px; }
+      header nav form .search input {
+        height: 30px;
+        width: 500px;
+        border: none;
+        outline: none;
+        font-size: 20px; }
+      header nav form .search .search_btn i {
+        font-size: 20px;
+        cursor: pointer;
+        color: GREY; }
+
+.lections {
+  margin-top: 70px;
+  margin-bottom: 70px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex; }
+  .lections div {
+    font-size: 100px;
+    font-weight: 700;
+    display: block;
+    margin: 0 auto;
+    padding: 13px;
+    padding-top: 0px; }
+
+.video_lections {
+  background-color: white;
+  padding: 10px; }
+  .video_lections .video_lections_preview {
+    width: auto !important;
+    margin: 0px 10px;
+    background-color: white; }
+    .video_lections .video_lections_preview img {
+      width: 250px;
+      height: 150px;
+      margin: 0; }
+    .video_lections .video_lections_preview a {
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 5px;
+      padding: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      -o-text-overflow: ellipsis;
+      text-overflow: ellipsis; }
+      .video_lections .video_lections_preview a:hover {
+        color: #04a49c;
+        -webkit-transition: 0.3s;
+        -o-transition: 0.3s;
+        transition: 0.3s; }
+
+.text_lections {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+  justify-content: space-around; }
+  .text_lections .text_lections_preview {
+    background-color: white;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
+    .text_lections .text_lections_preview img {
+      margin: 0;
+      width: 300px;
+      height: 150px; }
+    .text_lections .text_lections_preview a {
+      text-decoration: none;
+      display: block;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 20px;
+      margin-bottom: 20px;
+      -webkit-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s; }
+      .text_lections .text_lections_preview a:hover {
+        color: #04a49c; }

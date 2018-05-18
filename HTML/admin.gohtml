@@ -1,36 +1,63 @@
 {{define "admin"}}
-<!DOCTYPE html>
-<html>
+<html lang="ru" dir="ltr">
+
 <head>
   <meta charset="utf-8">
-  <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
-  <title>KPILex</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2 SHAVYHI</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&amp;subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/reset.css">
+  <link rel="stylesheet" href="static/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="static/css/slick.css">
+  <link rel="stylesheet" href="static/css/main.css">
+  <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
 </head>
-  <body>
-    <div class="Content">
-      <iframe name="dummyframe" hidden></iframe>
-      <div>
-        <form target="dummyframe" action="http://api.{{$.PublicUrl}}" method="POST" enctype="multipart/form-data">
-          <input type="test" name="name" value="" placeholder="Lection Name">
-          <input type="text" name="action" value="add" hidden>
-          <input type="submit" value="Add Lection">
-        </form>
-      </div>
-      <div>
-        <table>
-          <thead>
-            <th>Lections</th>
-          </thead>
-          <tbody>
-            {{range $lection := $.Lections}}
-            <tr>
-              <td><a href="/admin/{{$lection.Id}}">{{$lection.Name}}</a></td>
-            </tr>
-            {{end}}
-          </tbody>
-        </table>
-      </div>
+
+<body>
+  <header>
+    <nav class="container-header">
+      <p>KPILEX</p>
+      <form>
+        <div class="search">
+          <input type="text" name="" value="" placeholder="Поиск">
+          <div class="search_btn">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </div>
+        </div>
+      </form>
+    </nav>
+  </header>
+  <div class="container body-content">
+    <iframe name="dummyframe" hidden></iframe>
+    <div>
+      <form target="dummyframe" action="http://api.{{$.PublicUrl}}" method="POST" enctype="multipart/form-data">
+        <input class="form-control" type="test" name="name" value="" placeholder="Lection Name">
+        <input type="text" name="action" value="add" hidden>
+        <input class="btn btn-default" type="submit" value="Add Lection">
+      </form>
     </div>
-  </body>
+    <div>
+      <table>
+        <thead>
+          <th>Lections</th>
+        </thead>
+        <tbody>
+          {{range $lection := $.Lections}}
+          <tr>
+            <td>
+              <a href="/admin/{{$lection.Id}}">{{$lection.Name}}</a>
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="static/js/slick.min.js"></script>
+  <script src="static/js/main.js" charset="utf-8"></script>
+</body>
+
 </html>
 {{end}}

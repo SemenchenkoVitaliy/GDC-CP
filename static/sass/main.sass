@@ -1,0 +1,101 @@
+html
+  font-size: 10px
+  font-family: 'Roboto Slab', serif
+.container
+  width: 95%
+  max-width: 1630px
+  margin: 0 auto
+body
+  background-color: #ededed
+header
+  background-color: #2b2a29
+  padding: 7px 0px
+  nav
+    display: flex
+    align-items: center
+    justify-content: space-around
+    p
+      font-size: 28px
+      font-weight: 600
+      margin-top: 5px
+      color: white
+    form
+      .search
+        display: flex
+        align-items: center
+        padding: 5px
+        border: 1px solid white
+        background-color: white
+        border-radius: 7px
+        input
+          height: 30px
+          width: 500px
+          border: none
+          outline: none
+          font-size: 20px
+        .search_btn
+          i
+            font-size: 20px
+            cursor: pointer
+            color: GREY
+.lections
+  margin-top: 70px
+  margin-bottom: 70px
+  text-align: center
+  display: flex
+  div
+    font-size: 100px
+    font-weight: 700
+    display: block
+    margin: 0 auto
+    padding: 13px
+    padding-top: 0px
+.video_lections
+  background-color: white
+  padding: 10px
+  .video_lections_preview
+    width: auto!important
+    margin: 0px 10px
+    background-color: white
+    img
+      width: 250px
+      height: 150px
+      margin: 0
+    a
+      text-decoration: none
+      display: block
+      cursor: pointer
+      font-size: 16px
+      margin-top: 5px
+      padding: 2px
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      &:hover
+        color: #04a49c
+        transition: 0.3s
+.text_lections
+  display: flex
+  flex-wrap: wrap
+  justify-content: space-around
+  .text_lections_preview
+    background-color: white
+    margin-bottom: 20px
+    margin-top: 20px
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)
+    img
+      margin: 0
+      width: 300px
+      height: 150px
+      // width: 100%
+    a
+      text-decoration: none
+      display: block
+      padding: 4px 10px
+      cursor: pointer
+      font-size: 20px
+      margin-bottom: 20px
+      // padding: 4px
+      transition: 0.3s
+      &:hover
+        color: #04a49c
